@@ -1,0 +1,137 @@
+<!DOCTYPEhtml>
+<html>
+
+<head>
+
+	<script>
+		var saldo = 10000.50; //Float 1.36
+    var extrato = "Americanas 125.48" + "<br>" + "Cinemark 56.00" + "<br>" + "mercado 465.89";
+
+    var nome = prompt("nome:");
+
+    alert("Olá " + nome + " é um prazer ter você por aqui!")
+
+		function inicio() {
+
+			var escolha = parseInt(prompt('Selecione uma opção 1.) Saldo 2.) Extrato 3.) Saque 4.) Depósito 5.) transferência 6.) Sair'));
+
+			switch (escolha) {
+        case 1:
+          ver_saldo();
+        break;
+        case 2:
+				  ver_extrato();
+        break;
+        case 3:
+				  fazer_saque();
+        break;
+        case 4:
+          fazer_deposito();
+        break;
+        case 5:
+          fazer_transferencia();
+        break;
+        case 6:
+				  sair();
+        break;
+			  default:
+				  erro();
+			}	
+    }
+
+		function ver_saldo() {
+			alert('Seu saldo atual é: ' + saldo);
+			inicio();
+		}
+
+    function ver_extrato () {
+      alert(extrato);
+      inicio();
+    }
+
+    function fazer_saque() {
+			var saque = parseFloat(prompt('Qual o valor para saque?'));
+			if (isNaN(saque) || saque === '') {
+				alert('Por favor, informe um número:');
+				fazer_saque();
+			} 
+      else if (saque > saldo ) {
+        alert("Operação não autorizada");
+        fazer_saque();
+      }
+      else if (saque <= 0) {
+        alert("Operação não autorizada");
+        fazer_saque();
+      }
+      else {
+				saldo -= saque;
+				ver_saldo();
+			}
+		}
+
+		function fazer_deposito() {
+			var deposito = parseFloat(prompt('Qual o valor para depósito?'));
+			// Not a Number
+			if (isNaN(deposito) || deposito === '') {
+				alert('Por favor, informe um número:');
+				fazer_deposito();
+      } else if (deposito <= 0) {
+        alert("Operação não autorizada");
+        fazer_deposito();
+			} else {
+				saldo += deposito;
+				ver_saldo();
+			}
+		}
+
+    function fazer_transferencia() {
+      var conta = parseFloat(prompt('Qual o numero da conta?'));
+      if (isNaN(conta) || conta === '') {
+				alert('Por favor, informe o número da conta corretamente:');
+				fazer_transferencia();
+			} 
+      else if (conta <= 0) {
+        alert('Por favor, informe o número da conta corretamente:');
+        fazer_transferencia();
+      }
+			var transf = parseFloat(prompt('Qual o valor para transferência?'));
+			if (isNaN(transf) || transf === '') {
+				alert('Por favor, informe um número:');
+				fazer_transferencia();
+			} 
+      else if (transf > saldo ) {
+        alert("Operação não autorizada");
+        fazer_transferencia();
+      }
+      else if (transf <= 0) {
+        alert("Operação não autorizada");
+        fazer_transferencia();
+      }
+      else {
+				saldo -= transf;
+				ver_saldo();
+      }
+    }
+
+    function erro() {
+			alert('Por favor, informe um número entre 1 e 6');
+			inicio();
+		}
+
+		function sair() {
+			var confirma = confirm('Você deseja sair?');
+			if (confirma) {
+        alert(nome + ', foi um prazer ter você por aqui!');
+				window.close();
+			} else {
+				inicio();
+			}
+		}
+      
+		inicio();
+</script>
+</head>
+<body>
+
+</body>
+</html>
